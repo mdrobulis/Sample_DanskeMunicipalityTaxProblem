@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service", "service\service.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webapi", "webapi\webapi.csproj", "{EB2CAD5C-EB91-419F-9FC9-614B965E7158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{EB2CAD5C-EB91-419F-9FC9-614B965E7158}.Release|x64.Build.0 = Release|Any CPU
 		{EB2CAD5C-EB91-419F-9FC9-614B965E7158}.Release|x86.ActiveCfg = Release|Any CPU
 		{EB2CAD5C-EB91-419F-9FC9-614B965E7158}.Release|x86.Build.0 = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Debug|x86.Build.0 = Debug|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|x64.Build.0 = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7D5514A-F5DC-41E3-B223-5A3ACA9671ED}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
