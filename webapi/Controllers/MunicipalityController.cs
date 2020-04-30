@@ -29,7 +29,7 @@ namespace webapi.Controllers
         {
             try
             {
-                return _data.GetTaxRexords().Where(x => x.Municipality == municipality);
+                return _data.GetTaxRecords().Where(x => x.Municipality == municipality);
             }
             catch (Exception ex)
             {

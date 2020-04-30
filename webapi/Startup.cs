@@ -21,11 +21,11 @@ namespace webapi
         {
             Configuration = configuration;
 
-              IDataProvider InitDataProvider = new FileDataProvider("test.csv");
+              IDataProvider InitDataProvider = new FileDataProvider("../init.csv");
                 using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                db.TaxPeriods.AddRange(InitDataProvider.GetTaxRexords());
+                db.TaxPeriods.AddRange(InitDataProvider.GetTaxRecords());
                 db.SaveChanges();
             };
             
