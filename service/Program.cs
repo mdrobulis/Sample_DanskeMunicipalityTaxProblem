@@ -10,7 +10,7 @@ namespace service
         static void Main(string[] args)
         {
 
-            IDataProvider InitDataProvider = new FileDataProvider("test.csv");
+            IDataProvider InitDataProvider = new FileDataProvider("../init.csv");
             using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
@@ -22,6 +22,7 @@ namespace service
             ITaxCalc calc = new PeriodicTaxCalc();
             var res = calc.Calculate(dataProvider.GetTaxRexords(), new Data.TaxRequest(){Municipality="Vilnius", Date= new DateTime(2016,1,1) }  );
             Console.WriteLine(res);
+            
              res = calc.Calculate(dataProvider.GetTaxRexords(), new Data.TaxRequest(){Municipality="Vilnius", Date= new DateTime(2016,5,2) }  );
             Console.WriteLine(res);
              res = calc.Calculate(dataProvider.GetTaxRexords(), new Data.TaxRequest(){Municipality="Vilnius", Date= new DateTime(2016,7,10) }  );

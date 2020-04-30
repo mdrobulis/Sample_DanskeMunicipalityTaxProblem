@@ -24,7 +24,7 @@ namespace service.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {                          
            modelBuilder.Entity<TaxRecord>().HasKey(x=>x.ID);
-           modelBuilder.Entity<TaxRecord>().HasData(new TaxRecord{Municipality="Vilnius", ID=1,Start=new DateTime(2016,1,1),End = new DateTime(2016,12,31),TaxRate=0.1});
+           //modelBuilder.Entity<TaxRecord>().HasData(new TaxRecord{Municipality="Vilnius", ID=1,Start=new DateTime(2016,1,1),End = new DateTime(2016,12,31),TaxRate=0.1});
           
         }
 

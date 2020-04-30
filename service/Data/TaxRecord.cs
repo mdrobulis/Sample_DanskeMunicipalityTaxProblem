@@ -1,6 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace service.Data
 {
+  
+    [Table("TaxPeriods")]
     public class TaxRecord
     {
       

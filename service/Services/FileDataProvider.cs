@@ -25,6 +25,5 @@ namespace service.Services
             var records = csvReader.GetRecords<TaxRecord>();
             return records;            
         }
-    }
-    
+    }    
 }
