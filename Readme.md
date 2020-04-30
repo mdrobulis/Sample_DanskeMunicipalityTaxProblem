@@ -22,42 +22,57 @@ The result according to provided example would be:
 Full requirements for the application (choose the priority of tasks in the way that when the time ends
 up you would have working application, not necessarily with all functionality):
 
-- [ ] It has its own database where municipality taxes are stored
-- [ ] Taxes should have ability to be scheduled (yearly, monthly ,weekly ,daily) for each municipality
+- [x] It has its own database where municipality taxes are stored
+- [x] Taxes should have ability to be scheduled (yearly, monthly ,weekly ,daily) for each municipality
 - [ ] Application should have ability to import municipalities data from file (choose one data format you believe is suitable)
-- [ ] Application should have ability to insert new records for municipality taxes (one record at a time) 
-- [ ] User can ask for a specific municipality tax by entering municipality name and date
-- [ ] Errors needs to be handled i.e. internal errors should not to be exposed to the end user
-- [ ] You should ensure that application works correctly
+- [x] Application should have ability to insert new records for municipality taxes (one record at a time) 
+- [x] User can ask for a specific municipality tax by entering municipality name and date
+- [x] Errors needs to be handled i.e. internal errors should not to be exposed to the end user
+- [x] You should ensure that application works correctly
 
 Bonus tasks (if there is time left)
-- [ ] Application is deployed as a self-hosted windows service
-- [ ] Update record functionality is exposed via API
+- [x] Application is deployed as a self-hosted windows service
+- [x] Update record functionality is exposed via API
 
 
 #TODO:
 
 - [x] Understand the task
 - [x] Describe my data
-- [ ] Building blocks
+- [x] Building blocks
  - [x] Function to calculate how many periods are hit on a certain date, return tax rate for the shortest period.
- - [x] Database (sqlite)
- - [x] File IO (csv data import)
- - [ ] Web endpoint (nancy ?)
+ - [x] Data access layer 
+    - [x] 
+    - [x] File IO (csv data import)
+ - [x] Web endpoint
+
+# Fails 
+
+See Import Branch
+- Connection string reading from config...
+- Import application is console with its own connection string
+- Webapi has its own way of wiring up connection string...
+- Using local file as a database from nultiple locations creates path problems...
+
+#Tools and Libraries used
+
+- VS Code + Bash
+- Entity Framework Core
+- CsvHelper
+- ASP.NET Core WebAPI
+- Sqlite
+
+# How to run
+
+```
+$nuget restore
+$dotnet run -p webapi
+```
 
 
+# Thank you for the oportunity
 
-# App workflow
-
-Requiest to calculate tax for municipality x for date y, return a tax number
-
-- [x] Pure function that takes Tax Descriptions for nunicipalities and request, returns a tax number.
-- [x] Describe taxes
-- [x] Describe taxes
-- [x] Pull data from file
-- [x] Pull data from DB
-- [ ] Serve calculation over Web API
-
+MD
 
 
 
