@@ -5,20 +5,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace service.Services
 {
     public class TaxDB : DbContext
     {
 
+        
+
         public DbSet<TaxRecord> TaxPeriods { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string path = System.IO.Path.Combine(
-            System.Environment.CurrentDirectory, "TaxPeriods.db");
-            optionsBuilder.UseSqlite($"Filename={path}");
+        {            
+            Console.WriteLine(ConfigurationManager.ConnectionStrings["MyConnection"].ToString());
+            optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

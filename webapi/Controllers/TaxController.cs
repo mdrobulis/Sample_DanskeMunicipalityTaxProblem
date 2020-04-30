@@ -32,7 +32,7 @@ namespace webapi.Controllers
 
             
            //var request = new TaxRequest(){Municipality="Vilnius", Date= new DateTime(2016,5,2) };            
-           var taxRate = _calc.Calculate(_data.GetTaxRexords(),request );
+           var taxRate = _calc.Calculate(_data.GetTaxRecords(),request );
            var resp = new TaxResponse(){Request = request, TaxRate = taxRate };
            return resp;
 

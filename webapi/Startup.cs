@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using service.Services;
 using service.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace webapi
 {
@@ -21,11 +22,14 @@ namespace webapi
         {
             Configuration = configuration;
 
+              // recreate and seed the database
+              // 
+
               IDataProvider InitDataProvider = new FileDataProvider("test.csv");
                 using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                db.TaxPeriods.AddRange(InitDataProvider.GetTaxRexords());
+                db.TaxPeriods.AddRange(InitDataProvider.GetTaxRecords());
                 db.SaveChanges();
             };
             
@@ -37,6 +41,8 @@ namespace webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // services.AddDbContext<TaxDB>(options =>
+            // options.UseSqlite(Configuration.GetConnectionString("MyDatabase")));
             services.AddScoped<IDataProvider,DatabaseDataProvider >();
             services.AddScoped<ITaxCalc,PeriodicTaxCalc>();
             services.AddScoped<ITaxRecordRepository,TaxRepository>();
