@@ -17,7 +17,7 @@ namespace service.Services
             sourceFile = FileName;
         }
        
-        public IEnumerable<TaxRecord> GetTaxRexords()
+        public IEnumerable<TaxRecord> GetTaxRecords()
         {
             
             TextReader reader = new StreamReader(sourceFile);

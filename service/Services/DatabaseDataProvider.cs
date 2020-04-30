@@ -12,7 +12,7 @@ namespace service.Services
     public class DatabaseDataProvider:IDataProvider
     {   
        
-        public IEnumerable<TaxRecord> GetTaxRexords()
+        public IEnumerable<TaxRecord> GetTaxRecords()
         {
             using (var db = new TaxDB())
             {

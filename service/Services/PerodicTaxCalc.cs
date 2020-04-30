@@ -21,7 +21,7 @@ namespace service.Services
 
             foreach (var period in data.Where(x=>x.Municipality == request.Municipality))
             {                
-                if(request.Date >= period.Start && request.Date < period.End)
+                if(request.Date >= period.Start && request.Date <= period.End)
                 {
                     yield return period;
                 }
