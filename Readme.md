@@ -24,7 +24,7 @@ up you would have working application, not necessarily with all functionality):
 
 - [x] It has its own database where municipality taxes are stored
 - [x] Taxes should have ability to be scheduled (yearly, monthly ,weekly ,daily) for each municipality
-- [x] Application should have ability to import municipalities data from file (choose one data format you believe is suitable)
+- [ ] Application should have ability to import municipalities data from file (choose one data format you believe is suitable)
 - [x] Application should have ability to insert new records for municipality taxes (one record at a time) 
 - [x] User can ask for a specific municipality tax by entering municipality name and date
 - [x] Errors needs to be handled i.e. internal errors should not to be exposed to the end user
@@ -39,26 +39,40 @@ Bonus tasks (if there is time left)
 
 - [x] Understand the task
 - [x] Describe my data
-- [ ] Building blocks
+- [x] Building blocks
  - [x] Function to calculate how many periods are hit on a certain date, return tax rate for the shortest period.
- - [x] Database (sqlite)
- - [x] File IO (csv data import)
+ - [x] Data access layer 
+    - [x] 
+    - [x] File IO (csv data import)
  - [x] Web endpoint
 
+# Fails 
+
+See Import Branch
+- Connection string reading from config...
+- Import application is console with its own connection string
+- Webapi has its own way of wiring up connection string...
+- Using local file as a database from nultiple locations creates path problems...
+
+#Tools and Libraries used
+
+- VS Code + Bash
+- Entity Framework Core
+- CsvHelper
+- ASP.NET Core WebAPI
+- Sqlite
+
+# How to run
+
+```
+$nuget restore
+$dotnet run -p webapi
+```
 
 
-# App workflow
+# Thank you for the oportunity
 
-Requiest to calculate tax for municipality x for date y, return a tax number
-
-- [x] Pure function that takes Tax Descriptions for nunicipalities and request, returns a tax number.
-- [x] Describe taxes
-- [x] Describe taxes
-- [x] Pull data from file
-- [x] Pull data from DB
-- [x] Serve calculation over Web API
-- [x] Serve calculation over Web API
-
+MD
 
 
 
