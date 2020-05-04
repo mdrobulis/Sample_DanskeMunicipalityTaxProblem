@@ -14,6 +14,11 @@ namespace service.Data
       public DateTime End {get;set;}   
       public double TaxRate {get;set;}
 
+      public DateTime Created {get;set;}   
+      public DateTime? Modified {get;set;}
+      public DateTime? Deleted {get;set;}
+
+
     }
     
 }

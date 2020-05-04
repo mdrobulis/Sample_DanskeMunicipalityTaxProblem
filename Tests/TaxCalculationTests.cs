@@ -7,17 +7,17 @@ using service.Data;
 
 namespace Tests
 {
-    public class UnitTest1
+    public class TaxCalculationTests
     {
         IDataProvider data;
-        ITaxCalc calc;
+        ITaxCalculator calc;
 
         IEnumerable<TaxRecord> taxRecords;
-        public UnitTest1()
+        public TaxCalculationTests()
         {
             data = new FileDataProvider("../../../../init.csv");
-            taxRecords =data.GetTaxRecords();
-            calc = new PeriodicTaxCalc();            
+            taxRecords =data.GetMunicipalityTaxRecords("Vilnius");
+            calc = new PeriodicTaxCalculator();            
             
         }
 

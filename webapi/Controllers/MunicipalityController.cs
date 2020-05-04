@@ -12,24 +12,25 @@ namespace webapi.Controllers
     [ApiController]
     [Route("[controller]")]
     public class MunicipalityController : ControllerBase
-    {
+    {       
 
-        private readonly ILogger<TaxController> _logger;
-        IDataProvider _data;
+        private readonly ILogger<MunicipalityController> _logger;
+        private readonly IDataProvider _data;
+        private readonly IDataViewMapper _mapper;
 
-        public MunicipalityController(ILogger<TaxController> logger, IDataProvider data)
+        public MunicipalityController(ILogger<MunicipalityController> logger, IDataProvider data, IDataViewMapper mapper)
         {
             _logger = logger;
-
+            _mapper = mapper;
             _data = data;
         }
 
         [HttpGet("{municipality}")]
-        public IEnumerable<TaxRecord> Post(string municipality)
+        public IEnumerable<TaxRecordView> Get(string municipality)
         {
             try
             {
-                return _data.GetTaxRecords().Where(x => x.Municipality == municipality);
+                return _data.GetMunicipalityTaxRecords(municipality).Select(_mapper.TaxRecordToView);
             }
             catch (Exception ex)
             {

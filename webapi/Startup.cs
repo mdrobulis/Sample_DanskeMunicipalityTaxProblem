@@ -25,11 +25,11 @@ namespace webapi
               // recreate and seed the database
               // 
 
-              IDataProvider InitDataProvider = new FileDataProvider("test.csv");
+                var InitDataProvider = new FileDataProvider("test.csv");
                 using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                db.TaxPeriods.AddRange(InitDataProvider.GetTaxRecords());
+                db.TaxPeriods.AddRange(InitDataProvider.GetAllTaxRecords());
                 db.SaveChanges();
             };
             
@@ -44,8 +44,11 @@ namespace webapi
             // services.AddDbContext<TaxDB>(options =>
             // options.UseSqlite(Configuration.GetConnectionString("MyDatabase")));
             services.AddScoped<IDataProvider,DatabaseDataProvider >();
-            services.AddScoped<ITaxCalc,PeriodicTaxCalc>();
-            services.AddScoped<ITaxRecordRepository,TaxRepository>();
+            services.AddScoped<ITaxCalculator,PeriodicTaxCalculator>();
+            services.AddScoped<ITaxRecordRepository,NativeTaxRepository>();
+            services.AddScoped<ITimeProvider,UtcTimeProvider>();
+            services.AddScoped<IDataViewMapper,RecordMapper>();
+
             services.AddControllers();
         }
 
@@ -57,7 +60,8 @@ namespace webapi
                 app.UseDeveloperExceptionPage();
             } else 
             {
-                app.UseExceptionHandler("/error");
+                app.UseExceptionHandler("/error");  // Default Exception middleware
+                //app.UseExceptionHandler(x=>{});   // Lambda Exception middleware for more control.
             }
 
 

@@ -10,42 +10,44 @@ using service.Data;
 namespace webapi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class TaxRecordController : ControllerBase
+    [Route("v2/[controller]")]
+    public class TaxRecordControllerV2 : ControllerBase
     {
-
-        private readonly ILogger<TaxRecordController> _logger;
+        private readonly ILogger<TaxRecordControllerV2> _logger;
         private readonly ITaxRecordRepository _repo;
+        private readonly IDataViewMapper _mapper;
 
-        public TaxRecordController(ILogger<TaxRecordController> logger, ITaxRecordRepository repo )
+        public TaxRecordControllerV2(ILogger<TaxRecordControllerV2> logger, ITaxRecordRepository repo, IDataViewMapper mapper )
         {
             _logger = logger;
             _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpPut]
-        public IActionResult AddNewTaxRecord(TaxRecord record)
+        public IActionResult AddNewTaxRecord(TaxRecordView view)
         {
+            var record = _mapper.ViewToTaxRecord(view);
             _repo.Create(record);
             return new StatusCodeResult(200);
         }
 
         [HttpGet]
-        public IEnumerable<TaxRecord> GetAll()
+        public IEnumerable<TaxRecordView> GetAll()
         {
-            return _repo.RetrieveAll();            
+            return _repo.RetrieveAll().Select(_mapper.TaxRecordToView);
         }
 
         [HttpGet("{id:Long}")]
-        public TaxRecord GetOne(long id)
+        public TaxRecordView GetOne(long id)
         {
-            return _repo.Retrieve(id); 
+            return _mapper.TaxRecordToView(_repo.Retrieve(id));
         }
 
         [HttpPost]
-        public IActionResult Update(TaxRecord record)
+        public IActionResult Update(TaxRecordView view)
         {
-            _repo.Update(record);
+            _repo.Update(_mapper.ViewToTaxRecord(view));
             return new StatusCodeResult(200);
         }
 
