@@ -29,7 +29,7 @@ namespace webapi
                 using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                db.TaxPeriods.AddRange(InitDataProvider.GetAllTaxRecords());
+                db.TaxPeriods.AddRange(InitDataProvider.GetAllTaxRecords().Select(x=> {x.Created = DateTime.UtcNow; return x; }));
                 db.SaveChanges();
             };
             
@@ -41,8 +41,8 @@ namespace webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             //services.AddDbContext<TaxDB>(options =>
-             //  options.UseSqlite(Configuration.GetConnectionString("MyConnection")));
+            //services.AddDbContext<TaxDB>(options =>
+            //  options.UseSqlite(Configuration.GetConnectionString("MyConnection")));
             services.AddSingleton<IDataProvider,DatabaseDataProvider >();
             services.AddSingleton<ITaxCalculator,PeriodicTaxCalculator>();
             services.AddSingleton<ITaxRecordRepository,NativeTaxRepository>();

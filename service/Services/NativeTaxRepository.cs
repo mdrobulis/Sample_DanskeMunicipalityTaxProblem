@@ -57,15 +57,15 @@ namespace service.Services
         {
             using (var db = new TaxDB())
             {
-                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t Where t.ID={0} and t.Deleted is not null ",id).Single();
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t Where t.ID={0} and t.Deleted is null",id).Single();
             }
         }
 
         public IEnumerable<TaxRecord> RetrieveAll()
         {
             using (var db = new TaxDB())
-            {                
-                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Deleted is not null").ToList();
+            {          
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Deleted is null").ToList();
             }
         }
 
@@ -73,7 +73,7 @@ namespace service.Services
         {
             using (var db = new TaxDB())
             {
-                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Municipality={0} and t.Deleted is not null", municipality).ToList();
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Municipality={0} and t.Deleted is null", municipality).ToList();
             }
         }
 

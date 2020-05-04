@@ -10,7 +10,7 @@ using service.Data;
 namespace webapi.Controllers
 {
     [ApiController]
-    [Route("v2/[controller]")]
+    [Route("v2/TaxRecord")]
     public class TaxRecordControllerV2 : ControllerBase
     {
         private readonly ILogger<TaxRecordControllerV2> _logger;
@@ -35,7 +35,9 @@ namespace webapi.Controllers
         [HttpGet]
         public IEnumerable<TaxRecordView> GetAll()
         {
-            return _repo.RetrieveAll().Select(_mapper.TaxRecordToView);
+            var all = _repo.RetrieveAll();
+            var mapped = all.Select(_mapper.TaxRecordToView);
+            return mapped;
         }
 
         [HttpGet("{id:Long}")]

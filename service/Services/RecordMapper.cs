@@ -16,6 +16,7 @@ namespace service.Services
         {
             return new TaxRecordView()
             {
+                ID = r.ID,
                 Municipality = r.Municipality,
                 Start = r.Start,
                 End = r.End,

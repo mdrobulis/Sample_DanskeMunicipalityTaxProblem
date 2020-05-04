@@ -26,7 +26,7 @@ namespace service.Services
         {
              using (var db = new TaxDB())
             {
-                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Municipality={0} and t.Deleted is not null", municipality).ToList();
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Municipality={0} and t.Deleted is null", municipality).ToList();
             }
         }
     }
