@@ -4,11 +4,19 @@ using service.Data;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace service.Services
 {
     public class TaxRepository : ITaxRecordRepository
     {
+
+        DbContextOptions _options;
+        public TaxRepository(DbContextOptions options)
+        {
+            _options=options;
+        }
+
         public TaxRecord Create(TaxRecord t)
         {
             using (var db = new TaxDB())

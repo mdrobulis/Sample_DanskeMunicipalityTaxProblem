@@ -11,16 +11,19 @@ using System.Configuration;
 namespace service.Services
 {
     public class TaxDB : DbContext
-    {
+    {        
 
-        
+        public TaxDB()
+        {           
+        }
 
         public DbSet<TaxRecord> TaxPeriods { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {            
-            Console.WriteLine(ConfigurationManager.ConnectionStrings["MyConnection"].ToString());
-            optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
+           string path = System.IO.Path.Combine(
+                System.Environment.CurrentDirectory, "TaxDB.db");
+            optionsBuilder.UseSqlite($"Filename={path}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

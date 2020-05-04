@@ -25,7 +25,7 @@ namespace webapi
               // recreate and seed the database
               // 
 
-                var InitDataProvider = new FileDataProvider("test.csv");
+                var InitDataProvider = new FileDataProvider("../init.csv");
                 using(var db = new TaxDB()){
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
@@ -41,13 +41,13 @@ namespace webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<TaxDB>(options =>
-            // options.UseSqlite(Configuration.GetConnectionString("MyDatabase")));
-            services.AddScoped<IDataProvider,DatabaseDataProvider >();
-            services.AddScoped<ITaxCalculator,PeriodicTaxCalculator>();
-            services.AddScoped<ITaxRecordRepository,NativeTaxRepository>();
-            services.AddScoped<ITimeProvider,UtcTimeProvider>();
-            services.AddScoped<IDataViewMapper,RecordMapper>();
+             //services.AddDbContext<TaxDB>(options =>
+             //  options.UseSqlite(Configuration.GetConnectionString("MyConnection")));
+            services.AddSingleton<IDataProvider,DatabaseDataProvider >();
+            services.AddSingleton<ITaxCalculator,PeriodicTaxCalculator>();
+            services.AddSingleton<ITaxRecordRepository,NativeTaxRepository>();
+            services.AddSingleton<ITimeProvider,UtcTimeProvider>();
+            services.AddSingleton<IDataViewMapper,RecordMapper>();
 
             services.AddControllers();
         }
