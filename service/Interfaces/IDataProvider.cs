@@ -6,7 +6,9 @@ namespace service.Interfaces
 
     public interface IDataProvider {
 
-        IEnumerable<TaxRecord> GetTaxRecords();
+        
+        IEnumerable<TaxRecord> GetMunicipalityTaxRecords(string municipality);
+        
 
     }
     

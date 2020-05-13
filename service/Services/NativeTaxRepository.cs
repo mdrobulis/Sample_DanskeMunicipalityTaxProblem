@@ -4,24 +4,27 @@ using service.Data;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
 
 namespace service.Services
 {
-    public class TaxRepository : ITaxRecordRepository
+    public class NativeTaxRepository : ITaxRecordRepository
     {
-
-        DbContextOptions _options;
-        public TaxRepository(DbContextOptions options)
+        ITimeProvider _time;
+        public NativeTaxRepository(ITimeProvider time)
         {
-            _options=options;
+            _time =time;
+            
         }
-
         public TaxRecord Create(TaxRecord t)
         {
             using (var db = new TaxDB())
             {
+                t.Created = _time.CurrentTime();                
                 var res = db.TaxPeriods.Add(t);
+
                 db.SaveChanges();
                 return res.Entity;
             };
@@ -31,9 +34,20 @@ namespace service.Services
         public void Delete(long id)
         {
             using (var db = new TaxDB())
-            {
+            {                
                 var r = db.TaxPeriods.Find(id);
-                db.TaxPeriods.Remove(r);
+                r.Deleted = _time.CurrentTime();                
+                db.SaveChanges();
+            };
+
+        }
+
+        public void Restore(long id)
+        {
+            using (var db = new TaxDB())
+            {                
+                var r = db.TaxPeriods.Find(id);
+                r.Deleted = null;
                 db.SaveChanges();
             };
 
@@ -43,15 +57,15 @@ namespace service.Services
         {
             using (var db = new TaxDB())
             {
-                return db.TaxPeriods.Find(id);
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t Where t.ID={0} and t.Deleted is null",id).Single();
             }
         }
 
         public IEnumerable<TaxRecord> RetrieveAll()
         {
             using (var db = new TaxDB())
-            {
-                return new List<TaxRecord>(db.TaxPeriods);
+            {          
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Deleted is null").ToList();
             }
         }
 
@@ -59,7 +73,7 @@ namespace service.Services
         {
             using (var db = new TaxDB())
             {
-                return new List<TaxRecord>(db.TaxPeriods.AsQueryable().Where(x => x.Municipality == municipality));
+                return db.TaxPeriods.FromSqlRaw("select * from TaxPeriods t where t.Municipality={0} and t.Deleted is null", municipality).ToList();
             }
         }
 
@@ -68,6 +82,7 @@ namespace service.Services
         {
             using (var db = new TaxDB())
             {                
+                r.Modified = _time.CurrentTime();
                 var res =db.Update(r);
                 db.SaveChanges();
                 return res.Entity;

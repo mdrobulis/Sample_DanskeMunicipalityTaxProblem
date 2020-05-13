@@ -14,10 +14,10 @@ namespace webapi.Controllers
     public class TaxRecordController : ControllerBase
     {
 
-        private readonly ILogger<TaxController> _logger;
+        private readonly ILogger<TaxRecordController> _logger;
         private readonly ITaxRecordRepository _repo;
 
-        public TaxRecordController(ILogger<TaxController> logger, ITaxRecordRepository repo )
+        public TaxRecordController(ILogger<TaxRecordController> logger, ITaxRecordRepository repo )
         {
             _logger = logger;
             _repo = repo;

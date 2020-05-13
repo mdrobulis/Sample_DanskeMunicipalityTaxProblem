@@ -16,9 +16,9 @@ namespace webapi.Controllers
         
         private readonly ILogger<TaxController> _logger;
          IDataProvider _data;
-         ITaxCalc _calc;
+         ITaxCalculator _calc;
 
-        public TaxController(ILogger<TaxController> logger, IDataProvider data, ITaxCalc calc )
+        public TaxController(ILogger<TaxController> logger, IDataProvider data, ITaxCalculator calc )
         {
             _logger = logger;
             _calc = calc;
@@ -32,7 +32,7 @@ namespace webapi.Controllers
 
             
            //var request = new TaxRequest(){Municipality="Vilnius", Date= new DateTime(2016,5,2) };            
-           var taxRate = _calc.Calculate(_data.GetTaxRecords(),request );           
+           var taxRate = _calc.Calculate(_data.GetMunicipalityTaxRecords(request.Municipality),request );           
            var resp = new TaxResponse(){Request = request, TaxRate = taxRate };
            return resp;
 
